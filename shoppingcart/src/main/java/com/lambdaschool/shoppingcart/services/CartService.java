@@ -21,7 +21,7 @@ public interface CartService
     /**
      * Returns a list of all the Carts for the given user id
      *
-     * @param userid userid that you seek
+     * @param username username that you seek
      * @return List of Carts. If no Carts, empty list.
      */
     List<Cart> findAllByUsername(String username);
