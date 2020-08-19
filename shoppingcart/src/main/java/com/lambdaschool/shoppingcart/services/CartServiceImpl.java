@@ -44,9 +44,9 @@ public class CartServiceImpl
     private UserAuditing userAuditing;
 
     @Override
-    public List<Cart> findAllByUserId(Long userid)
+    public List<Cart> findAllByUsername(String username)
     {
-        return cartrepos.findAllByUser_Userid(userid);
+        return cartrepos.findAllByUser_Username(username);
     }
 
     @Override
@@ -63,8 +63,7 @@ public class CartServiceImpl
     {
         Cart newCart = new Cart();
 
-        User dbuser = userrepos.findById(user.getUserid())
-                .orElseThrow(() -> new ResourceNotFoundException("User id " + user.getUserid() + " not found"));
+        User dbuser = userrepos.findByUsername(user.getUsername());
         newCart.setUser(dbuser);
 
         Product dbproduct = productrepos.findById(product.getProductid())
@@ -86,6 +85,9 @@ public class CartServiceImpl
     public Cart save(Cart cart,
                      Product product)
     {
+
+
+
         Cart updateCart = cartrepos.findById(cart.getCartid())
                 .orElseThrow(() -> new ResourceNotFoundException("Cart Id " + cart.getCartid() + " not found"));
         Product updateProduct = productrepos.findById(product.getProductid())

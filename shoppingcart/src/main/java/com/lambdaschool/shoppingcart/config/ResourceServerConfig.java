@@ -35,6 +35,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/logout")
                 .authenticated()
+                .antMatchers("/users/users", "/users/user", "/users/user/**", "/carts/cart/**", "/products/products", "/products/product", "/products/product/**")
+                .hasRole("ADMIN")
+                .antMatchers("/carts/user")
+                .authenticated()
+
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(new OAuth2AccessDeniedHandler());
